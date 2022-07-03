@@ -70,9 +70,6 @@ export default defineComponent({
     const auth_token = LocalStorage.getItem("auth_token");
     onMounted(() => {
       if (!auth_token) {
-        // console.log(auth_token);
-        // const removeLinks = linksList.indexOf(3);
-        // linksList = linksList.filter((data) => data.title != "Dashboard");
       } else {
         authStore.setMe();
         authStore.updateToken;

@@ -125,17 +125,15 @@ export default defineComponent({
   padding: 1rem;
 }
 p {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   justify-content: center;
+   margin-top: 4px;
+  margin-left: 4px;
+  display: flex;
 }
 .update {
   margin-left: 40px;
   margin-top: 40px;
 }
-p {
-  margin-top: 4px;
-  margin-left: 4px;
-  display: flex;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+
 </style>

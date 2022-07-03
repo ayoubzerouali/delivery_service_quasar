@@ -30,7 +30,9 @@ export const useAuthStore = defineStore("auth", {
   },
 
   actions: {
-    signOut() {},
+    signOut() {
+      localStorage.removeItem("auth_token");
+    },
 
     setMe(state, me) {
       let value = LocalStorage.getItem("auth_token");
@@ -47,3 +49,4 @@ export const useAuthStore = defineStore("auth", {
     },
   },
 });
+export default useAuthStore;

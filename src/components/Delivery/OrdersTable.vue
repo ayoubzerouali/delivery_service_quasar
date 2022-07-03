@@ -1,19 +1,21 @@
 <template>
-  <q-table
-    title="Orders Table"
-    clickable
-    :rows="rows"
-    :columns="columns"
-    row-key="name"
-  >
-    <template v-slot:body-cell-action="props">
-      <q-td>
-        <q-btn @click="accept(props.row.id)" size="sm" color="primary"
-          >Take it</q-btn
-        >
-      </q-td>
-    </template>
-  </q-table>
+  <q-intersection transition="scale" class="example-item">
+    <q-table
+      title="Orders Table"
+      clickable
+      :rows="rows"
+      :columns="columns"
+      row-key="name"
+    >
+      <template v-slot:body-cell-action="props">
+        <q-td>
+          <q-btn @click="accept(props.row.id)" size="sm" color="primary">{{
+            props.row.state
+          }}</q-btn>
+        </q-td>
+      </template>
+    </q-table>
+  </q-intersection>
 </template>
 
 <script>
@@ -84,44 +86,47 @@ export default defineComponent({
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res);
         this.rows = res.data.data;
+        this.rows = this.rows.filter(
+          (data) => JSON.parse(JSON.stringify(data.state)) !== "finished"
+        );
         $q.notify({
-          color: "red-5",
+          color: "green-4",
           textColor: "white",
-          icon: "warning",
-          message: "api worked",
+          icon: "cloud_done",
+          message: "Orders ...",
         });
       })
       .catch((error) => {
-        // console.log(`HELLOOOO ${authStore.token}`);
         console.error(error);
         $q.notify({
           color: "red-5",
           textColor: "white",
           icon: "warning",
-          message: "no data fetched",
+          message: "Netword Error",
         });
       });
   },
-  setup() {
-    // onMounted(() => {});
-    // const authStore = useAuthStore();
+  methods: {
+    accept(id) {
+      api
+        .post(
+          `/orders/${id}/process`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${authStore.token}` },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => console.error(error));
+    },
+  },
 
+  setup() {
     return {
       columns,
-      accept(id) {
-        api
-          .post(
-            `/orders/${id}/process`,
-            {},
-            {
-              headers: { Authorization: `Bearer ${authStore.token}` },
-            }
-          )
-          .then((res) => console.log(res))
-          .catch((error) => console.error(error.response));
-      },
     };
   },
 });

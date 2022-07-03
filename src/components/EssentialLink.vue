@@ -1,5 +1,5 @@
 <template>
-  <q-item v-show="authStore.token" clickable to="/dashboard">
+  <q-item v-show="authStore.token" clickable to="/home">
     <q-item-section class="item">
       <q-icon name="dashboard" />
     </q-item-section>
@@ -24,7 +24,7 @@
 
   <q-item v-show="!authStore.token" clickable to="/register">
     <q-item-section class="item">
-      <font-awesome-icon icon="fa-solid fa-id-card" />
+      <q-icon icon="login" />
     </q-item-section>
     <q-item-section>
       <q-item-label>Register</q-item-label>
@@ -45,7 +45,7 @@
   </q-item>
 
   <q-separator />
-  <q-item v-show="authStore.token" clickable to="/logout">
+  <q-item v-show="authStore.token" clickable @click="logout">
     <q-item-section class="item">
       <q-icon name="logout" />
     </q-item-section>
@@ -61,12 +61,19 @@
 <script>
 import { defineComponent } from "vue";
 import { useAuthStore } from "../stores/auth";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
     const authStore = useAuthStore();
+    const router = useRouter();
+
     return {
       authStore,
+      logout() {
+        authStore.signOut();
+        router.push("/login");
+      },
     };
   },
   name: "EssentialLink",

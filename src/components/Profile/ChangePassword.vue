@@ -1,58 +1,34 @@
 <template>
-  <form @submit="update">
-    <div class="row"></div>
+  <form @submit.prevent="update">
+    <div class="row">
+      <p>Change Password</p>
+    </div>
     <div class="row">
       <div class="column">
-        <p>Profile Settings</p>
         <div class="form-control">
           <q-input
             rounded
             outlined
-            v-model="data.fname"
-            hint="Change your first name"
-            label="Update Your first name"
-          />
-        </div>
-        <div class="form-control">
-          <q-input
-            rounded
-            outlined
-            v-model="data.lname"
-            hint="Change your last name"
-            label="Update Last name"
-          />
-        </div>
-        <div class="form-control">
-          <q-input
-            rounded
-            outlined
-            v-model="data.email"
-            label="Update email"
-            hint="Your email"
+            v-model="data.password"
+            hint="input your current password"
+            label="Your Password"
           />
         </div>
       </div>
-
+      <q-separator vertical />
       <div class="column">
-        <p>Change password</p>
         <div class="form-control">
           <q-input
             rounded
             outlined
-            label="Update Phone number"
-            hint="Change phone number"
+            label="Your New Password"
+            hint="input your new password"
           />
         </div>
-        <!-- <div class="form-control">
-          <q-input rounded outlined label="Input New Password" />
+        <div class="form-control update">
+          <q-btn label="Update" type="Update" color="primary" />
         </div>
-        <div class="form-control">
-          <q-input rounded outlined label="Confirm Password" />
-        </div> -->
       </div>
-    </div>
-    <div class="form-control">
-      <q-btn label="Update" type="Update" color="primary" />
     </div>
   </form>
 </template>
@@ -64,15 +40,11 @@ import { LocalStorage } from "quasar";
 
 export default defineComponent({
   setup() {
-    const token = LocalStorage.getItem("auth_token");
-    const text = ref(null);
     let data = reactive({
-      email: ref(null),
-      fname: ref(null),
-      lname: ref(null),
-      phone: ref(null),
+      password: ref(null),
+      newPassword: ref(null),
     });
-    // const password = ref(null);
+    onMounted(() => {});
     return {
       data,
     };
@@ -92,5 +64,12 @@ export default defineComponent({
 p {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   justify-content: center;
+  margin-top: 4px;
+  margin-left: 4px;
+  display: flex;
+}
+.update {
+  margin-left: 40px;
+  margin-top: 20px;
 }
 </style>

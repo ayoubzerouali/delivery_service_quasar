@@ -7,9 +7,17 @@
     </div>
     <div class="row app-card">
       <div class="column">
-        <app-card>
-          <profile-update></profile-update>
-        </app-card>
+        <div class="hamida">
+          <app-card>
+            <profile-update></profile-update>
+          </app-card>
+        </div>
+        <q-separator />
+        <div class="hamidou">
+          <app-card>
+            <change-password></change-password>
+          </app-card>
+        </div>
       </div>
     </div>
   </q-scroll-area>
@@ -18,14 +26,14 @@
 
 <script>
 import ProfileUpdate from "../components/Profile/ProfileUpdate.vue";
+import ChangePassword from "../components/Profile/ChangePassword.vue";
 import AppCard from "../components/UI/AppCard.vue";
-
-// import { useAuthStore } from "/src/stores/auth";
 
 export default {
   components: {
     AppCard,
     ProfileUpdate,
+    ChangePassword,
   },
 };
 </script>
@@ -35,5 +43,10 @@ export default {
   align-content: center;
   justify-content: center;
   margin-left: 30px;
+}
+.hamidou {
+  padding: 4rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
