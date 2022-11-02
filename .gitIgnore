@@ -1,0 +1,5 @@
+/BACK/delivery/node_modules
+/FRONT/delivery/node_modules
+/node_modules
+node_modules
+.env
